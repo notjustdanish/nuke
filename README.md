@@ -2,6 +2,6 @@
 <img src="assets/nukepic.jpg"> 
 </p> 
 
-<p color=" style=" color:#00ff00; background:#000;>
-  <b>⚡N U K E </b>
+<p color=" style=" color:#00ff00 align="center">
+  <b>⚡N U K E ⚡</b>
 </p>
