@@ -1,3 +1,5 @@
+<div="center">
+
 <p align="center"  width="280"> 
 <img src="assets/nukepic.jpg"> 
 </p> 
