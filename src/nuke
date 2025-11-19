@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# nuke v5 – final, flawless, press r to execute
+set -euo pipefail
+trap 'echo -e "\n\033[31mNuke stopped.\033[0m" >&2; exit 0' INT TERM
+
+H="$HOME/.nuke_hist"
+MODEL=$(ollama list 2>/dev/null | awk 'NR>1 && /qwen|llama/ {print $1; exit}' || echo "qwen2.5:14b")
+CTX="Kali $(grep -m1 PRETTY_NAME /etc/os-release 2>/dev/null | cut -d'"' -f2 || uname -r) $(uname -m)"
+
+one() {
+  timeout 20 ollama run "$MODEL" --nowordwrap <<< "Give ONLY the single best command, nothing else. For: $1 (system: $CTX)" 2>/dev/null || echo "echo '[thinking] try again'"
+}
+
+full() {
+  timeout 45 ollama run "$MODEL" --nowordwrap <<< "Unfiltered elite explanation with examples, pro flags, aliases for: $1 (system: $CTX)" 2>/dev/null | cat
+}
+
+clear
+echo -e "\033[1;31m   ╔╗╔╦ ╦╦╔═╔═╗\033[0m"
+echo -e "\033[1;31m   ╚╗║╚╦╝╠╩╗║ ║ nuke v5 by wtf.mr\033[0m"
+echo -e "\033[1;31m   ╚╝╩ ╩╩ ╩╚═╝\033[0m\n"
+
+while :; do
+  read -p $'\033[31m▸ \033[0m' -r query || continue
+  query="${query#"${query%%[![:space:]]*}"}"
+  [[ -z "$query" ]] && continue
+  printf "\033[90m%s\033[0m %s\n" "$(date +%H:%M)" "$query" >> "$H"
+
+  cmd=$(one "$query")
+  echo -e "\n\033[32m$cmd\033[0m\n"
+  echo -e "\033[36m[r] Run • [SPACE] Details • [ENTER] Copy • [q] Quit\033[0m"
+
+  while :; do
+    if read -t 18 -n 1 key 2>/dev/null; then
+      case "$key" in
+        r|R) clear; echo -e "\033[31mExecuting → $cmd\033[0m"; eval "$cmd"; echo -e "\n\033[32mFinished. Press any key…\033[0m"; read -n1; break ;;
+        " ")  clear; full "$query"; echo -e "\nPress any key…"; read -n1; break ;;
+        q|Q)  echo -e "\n\033[31mStay dangerous, wtf.mr\033[0m"; exit 0 ;;
+        "")   echo "$cmd" | xclip -selection clipboard 2>/dev/null && echo -e "\n\033[32mCopied to clipboard!\033[0m\n" || true; break ;;
+      esac
+    else
+      echo -e "\n\033[33mTimeout – ask again or press q\033[0m"; break
+    fi
+  done
+  clear
+done
