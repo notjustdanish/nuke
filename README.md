@@ -67,5 +67,6 @@ I don't tech Linux. I weaponize it. --wtf.mr
 <br> 
 <b> Star this repo if you belive tool should be dangerous. <b>
 <b> Fork it if you want to make it even more lethal. <b>
+<b> ❤️🎀❤️</b>
  
 
