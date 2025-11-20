@@ -83,6 +83,7 @@ Just run the installer — nuke automatically picks the **fastest possible model
 curl -fsSL https://raw.githubusercontent.com/notjustdanish/nuke/main/install.sh | MODEL=phi3 bash
 ```
 <br> 
+
 ```
 # Or force 32b on a beast machine
 curl -fsSL https://raw.githubusercontent.com/notjustdanish/nuke/main/install.sh | MODEL=qwen2.5:32b bash
