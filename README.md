@@ -13,7 +13,7 @@
  
   ![GitHub forks](https://img.shields.io/github/forks/notjustdanish/nuke?style=social)
    ![GitHub Repo stars](https://img.shields.io/github/stars/notjustdanish/nuke?style=social)
-   ![GitHub language count](https://img.shields.io/github/languages/notjustdadnish/nuke?&style=social&logo=hyper)
+   ![GitHub language count](https://img.shields.io/github/languages/notjustdanish/nuke?&style=social&logo=hyper)
   
    ![Maintenance](https://img.shields.io/badge/Maintained%3F-Yes-white?&style=social&logo=hugo)
 
