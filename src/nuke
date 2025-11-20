@@ -1,47 +1,89 @@
-#!/usr/bin/env bash
-# nuke v5 – final, flawless, press r to execute
-set -euo pipefail
-trap 'echo -e "\n\033[31mNuke stopped.\033[0m" >&2; exit 0' INT TERM
-
-H="$HOME/.nuke_hist"
-MODEL=$(ollama list 2>/dev/null | awk 'NR>1 && /qwen|llama/ {print $1; exit}' || echo "qwen2.5:14b")
-CTX="Kali $(grep -m1 PRETTY_NAME /etc/os-release 2>/dev/null | cut -d'"' -f2 || uname -r) $(uname -m)"
-
-one() {
-  timeout 20 ollama run "$MODEL" --nowordwrap <<< "Give ONLY the single best command, nothing else. For: $1 (system: $CTX)" 2>/dev/null || echo "echo '[thinking] try again'"
-}
-
-full() {
-  timeout 45 ollama run "$MODEL" --nowordwrap <<< "Unfiltered elite explanation with examples, pro flags, aliases for: $1 (system: $CTX)" 2>/dev/null | cat
-}
+#!/bin/bash
+# nuke — unfiltered Kali AI co-pilot by wtf.mr
+# Auto-detects RAM → forces the BEST possible qwen2.5 model
+# Works on 4GB laptops and 64GB beasts — forever.
 
 clear
-echo -e "\033[1;31m   ╔╗╔╦ ╦╦╔═╔═╗\033[0m"
-echo -e "\033[1;31m   ╚╗║╚╦╝╠╩╗║ ║ nuke v5 by wtf.mr\033[0m"
-echo -e "\033[1;31m   ╚╝╩ ╩╩ ╩╚═╝\033[0m\n"
-echo -e "/033[1,31m   @notjustdanish - @wtf.mr\033[0m\n"
 
+# === ASCII ART (red) ===
+echo -e "\033[31m"
+cat << "ASCII"
+███╗   ██╗██╗   ██╗██╗  ██╗███████╗
+████╗  ██║██║   ██║██║ ██╔╝██╔════╝
+██╔██╗ ██║██║   ██║█████╔╝ █████╗  
+██║╚██╗██║██║   ██║██╔═██╗ ██╔══╝  
+██║ ╚████║╚██████╔╝██║  ██╗███████╗
+╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+           press r → it runs
+ASCII
+echo -e "\033[0m"
+
+# === AUTO MODEL SELECTOR + UPGRADE LOGIC ===
+RAM_GB=$(free -m | awk '/^Mem:/{printf "%d", $2/1024}')
+
+case $RAM_GB in
+    [1-2])   BEST="qwen2.5:3b-instruct-q8_0"   ;;  # 4–5 GB  → fast + smart
+    [3-9])   BEST="qwen2.5:7b-instruct-q5_K_M" ;;  # 6–9 GB  → very fast
+    1[0-3])  BEST="qwen2.5:14b-instruct-q5_K_M";;  # 10–13 GB → beast
+    *)       BEST="qwen2.5:32b-instruct-q5_K_M";;  # 14+ GB  → god mode
+esac
+
+# Detect current default model
+CURRENT=$(ollama list 2>/dev/null | awk 'NR==2 {print $1}' | cut -d: -f1)
+
+# Auto-upgrade if trash model is active
+if [[ "$CURRENT" == "phi3" ]] || [[ "$CURRENT" == "gemma"* ]] || [[ -z "$CURRENT" ]]; then
+    echo -e "\033[33mUpgrading weak model → pulling $BEST (best for ${RAM_GB}GB RAM)\033[0m"
+    ollama rm "$CURRENT" 2>/dev/null || true
+    ollama pull "$BEST"
+fi
+
+MODEL="$BEST"
+
+# === MAIN LOOP ===
 while :; do
-  read -p $'\033[31m▸ \033[0m' -r query || continue
-  query="${query#"${query%%[![:space:]]*}"}"
-  [[ -z "$query" ]] && continue
-  printf "\033[90m%s\033[0m %s\n" "$(date +%H:%M)" "$query" >> "$H"
+    read -p "▸ " query
+    [[ "$query" =~ ^[qQ]$ ]] && echo -e "\n\033[31mExited. Stay dangerous, wtf.mr\033[0m" && exit 0
 
-  cmd=$(one "$query")
-  echo -e "\n\033[32m$cmd\033[0m\n"
-  echo -e "\033[36m[r] Run • [SPACE] Details • [ENTER] Copy • [q] Quit\033[0m"
+    echo -e "\033[90mthinking...\033[0m"
+    response=$(ollama run "$MODEL" "$query" 2>/dev/null | grep -v "^$" | tail -n 20)
 
-  while :; do
-    if read -t 18 -n 1 key 2>/dev/null; then
-      case "$key" in
-        r|R) clear; echo -e "\033[31mExecuting → $cmd\033[0m"; eval "$cmd"; echo -e "\n\033[32mFinished. Press any key…\033[0m"; read -n1; break ;;
-        " ")  clear; full "$query"; echo -e "\nPress any key…"; read -n1; break ;;
-        q|Q)  echo -e "\n\033[31mStay dangerous, wtf.mr\033[0m"; exit 0 ;;
-        "")   echo "$cmd" | xclip -selection clipboard 2>/dev/null && echo -e "\n\033[32mCopied to clipboard!\033[0m\n" || true; break ;;
-      esac
-    else
-      echo -e "\n\033[33mTimeout – ask again or press q\033[0m"; break
+    if [[ -z "$response" ]]; then
+        echo -e "\033[31m[error] no response — try again\033[0m"
+        continue
     fi
-  done
-  clear
+
+    echo -e "\033[32m$response\033[0m"
+
+    read -n1 -p $'\033[33m[r] Run • [SPACE] Details • [ENTER] Copy • [q] Quit \033[0m' key
+    echo
+
+    case "$key" in
+        r|R) 
+            echo -e "\033[31mExecuting...\033[0m"
+            echo "$response" | bash 2>/dev/null || echo -e "\033[31mCommand failed or unsafe\033[0m"
+            echo -e "\033[90mFinished. Press any key...\033[0m"
+            read -n1
+            ;;
+        " ") 
+            echo -e "\033[34m$response\033[0m"
+            read -n1 -p "Press any key to continue..."
+            ;;
+        "") 
+            echo "$response" | xclip -selection clipboard
+            echo -e "\033[32mCopied to clipboard!\033[0m"
+            ;;
+    esac
+    clear
+    echo -e "\033[31m"  # re-print ASCII
+    cat << "ASCII"
+███╗   ██╗██╗   ██╗██╗  ██╗███████╗
+████╗  ██║██║   ██║██║ ██╔╝██╔════╝
+██╔██╗ ██║██║   ██║█████╔╝ █████╗  
+██║╚██╗██║██║   ██║██╔═██╗ ██╔══╝  
+██║ ╚████║╚██████╔╝██║  ██╗███████╗
+╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+           press r → it runs
+ASCII
+    echo -e "\033[0m"
 done
