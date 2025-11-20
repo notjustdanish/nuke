@@ -93,9 +93,9 @@ curl -fsSL https://raw.githubusercontent.com/notjustdanish/nuke/main/install.sh 
 <br> <br>
 <b> Made by with ❤️ <b>
  [![](https://img.shields.io/badge/✨wtf.mr✨-white?&style=social&logo=discord)](https://t.me/wtf.mr)
- ```
-I don't tech Linux. I weaponize it. --wtf.mr
-```
+  
+**I don't tech Linux. I weaponize it. --wtf.mr**
+
 <br> 
 <b> Star this repo if you belive tool should be dangerous. <b> 
   <br>
