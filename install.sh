@@ -22,6 +22,6 @@ chmod +x ~/bin/nuke
 SHELLRC="$HOME/.$(basename "$SHELL"rc)"
 grep -q "nuke" "$SHELLRC" 2>/dev/null || echo "alias nuke='~/bin/nuke'" >> "$SHELLRC"
 
-echo -e "\n\033[1;32mNUKE INSTALLED SUCCESSFULLY!\033[0m"
+echo -e "\n\033[1;32mNUKE INSTALLED SUCCESSFULLY! BABY..😘\033[0m"
 echo -e "\033[1;36mJust type: nuke\033[0m"
 echo -e "\033[90mMade with love by wtf.mr\033[0m"
