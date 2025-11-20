@@ -2,7 +2,8 @@
 # nuke — unfiltered Kali AI co-pilot by wtf.mr
 # Auto-detects RAM → forces the BEST possible qwen2.5 model
 # Works on 4GB laptops and 64GB beasts — forever.
-
+# Hide Ollama's startup spam
+export OLLAMA_HOST=127.0.0.1:11434 2>/dev/null
 clear
 
 # === ASCII ART (red) ===
