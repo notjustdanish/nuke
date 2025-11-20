@@ -74,6 +74,8 @@ Just run the installer — nuke automatically picks the **fastest possible model
 
 <b> Now you are good to go ALL RADY..! </b>
 
+ <br> <br>
+
  Optional: Let power users override <b> (still one-liner) </b> 💀 Don't change if don't knoe 💀
 
  ```
@@ -82,7 +84,7 @@ curl -fsSL https://raw.githubusercontent.com/notjustdanish/nuke/main/install.sh 
 ```
 <br> 
 ```
- <b> # Or force 32b on a beast machine </b>
+# Or force 32b on a beast machine
 curl -fsSL https://raw.githubusercontent.com/notjustdanish/nuke/main/install.sh | MODEL=qwen2.5:32b bash
 ```
 
