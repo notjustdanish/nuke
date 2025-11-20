@@ -61,6 +61,13 @@ nuke
 ```
 <br>
 
+**Troubleshoot** After Successfully Installation **Paste these at once**
+```
+export PATH="$HOME/bin:$PATH"
+echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
+nuke
+```
+<br> <br>
 <b> Smart Model Auto-Selection (based on your laptop RAM) </b>
 
 | Laptop RAM   | Auto-selected Model                  | Approx. RAM Usage | Speed       |
