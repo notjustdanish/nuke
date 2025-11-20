@@ -4,6 +4,11 @@
 # Works on 4GB laptops and 64GB beasts — forever.
 # Hide Ollama's startup spam
 export OLLAMA_HOST=127.0.0.1:11434 2>/dev/null
+
+# Start Ollama server if not already running (the real fix)
+ollama serve > /dev/null 2>&1 &
+sleep 2
+
 clear
 
 # === ASCII ART (red) ===
