@@ -19,6 +19,7 @@ clear
 echo -e "\033[1;31m   ╔╗╔╦ ╦╦╔═╔═╗\033[0m"
 echo -e "\033[1;31m   ╚╗║╚╦╝╠╩╗║ ║ nuke v5 by wtf.mr\033[0m"
 echo -e "\033[1;31m   ╚╝╩ ╩╩ ╩╚═╝\033[0m\n"
+echo -e "/033[1,31m   @notjustdanish - @wtf.mr\033[0m\n"
 
 while :; do
   read -p $'\033[31m▸ \033[0m' -r query || continue
