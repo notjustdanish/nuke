@@ -1,63 +1,65 @@
+
 #!/bin/bash
 set -e
 
-echo -e "\033[1;31mInstalling nuke Baby😘 — unfiltered Kali AI co-pilot by wtf.mr\033[0m"
+echo -e "\033[1;31m╔═══════════════════════════════════════════╗"
+echo -e "     Installing nuke Baby..😘 — unfiltered Kali AI co-pilot"
+echo -e "╚═══════════════════════════════════════════╝\033[0m"
 
-# === SMART MODEL SELECTOR BASED ON RAM ===
-detect_ram() {
-    free -m | awk '/^Mem:/{print int($2/1024)}'
-}
+# === Detect RAM & pick perfect model ===
+RAM_GB=$(free -m | awk '/^Mem:/{printf "%d", $2/1024}')
+case $RAM_GB in
+    [1-5])   MODEL="phi3:mini" ; RAM_MSG="4–5 GB" ;;
+    [6-9])   MODEL="qwen2.5:7b-instruct-q5_K_M" ; RAM_MSG="6–9 GB" ;;
+    1[0-3])  MODEL="qwen2.5:14b-instruct-q5_K_M" ; RAM_MSG="10–13 GB" ;;
+    *)       MODEL="qwen2.5:32b-instruct-q5_K_M" ; RAM_MSG="14+ GB (beast)" ;;
+esac
 
-get_model() {
-    RAM_GB=$(detect_ram)
-    echo "Detected ${RAM_GB}GB RAM → selecting best model..." >&2
-    case $RAM_GB in
-        [1-5])   echo "phi3:mini"                    ;;  # 4–5 GB  → ~3GB RAM usage
-        [6-9])   echo "qwen2.5:7b-instruct-q5_K_M"   ;;  # 6–9 GB  → ~6GB
-        1[0-3])  echo "qwen2.5:14b-instruct-q5_K_M"  ;;  # 10–13 GB → ~10GB
-        *)       echo "qwen2.5:32b-instruct-q5_K_M"  ;;  # 14+ GB → beast mode
-    esac
-}
+echo -e "\033[33mDetected $RAM_GB GB RAM → using $MODEL ($RAM_MSG)\033[0m"
 
-# Allow manual override: MODEL=phi3 curl ... | bash
-MODEL="${MODEL:-$(get_model)}"
-
-# === INSTALL OLLAMA ===
+# === Install Ollama ===
 echo -e "\033[33mInstalling Ollama...\033[0m"
 curl -fsSL https://ollama.com/install.sh | sh
 
-# === PULL BEST MODEL FOR YOUR MACHINE ===
-echo -e "\033[33mDownloading $MODEL (optimized for your RAM)...\033[0m"
-ollama pull "$MODEL"
+# === CRITICAL FIX: Start Ollama server properly and wait ===
+echo -e "\033[33mStarting Ollama server...\033[0m"
+ollama serve &>/dev/null &
+OLLAMA_PID=$!
+sleep 6   # give it time to fully start (this is the real fix)
 
-# === INSTALL TINY DEPENDENCIES ===
+# === Download model (with retry) ===
+echo -e "\033[33mDownloading $MODEL — this may take a while...\033[0m"
+for i in {1..3}; do
+    if ollama pull "$MODEL"; then
+        break
+    else
+        echo "Retry $i/3 in 5s..."
+        sleep 5
+    fi
+done
+
+# === Install tiny dependencies ===
 echo -e "\033[33mInstalling xclip + fzf...\033[0m"
-sudo apt update && sudo apt install -y xclip fzf
+sudo apt update -qq && sudo apt install -y xclip fzf
 
-# === INSTALL nuke SCRIPT ===
-echo -e "\033[33mPlacing nuke in ~/bin...\033[0m"
+# === Install nuke binary ===
+echo -e "\033[33mInstalling nuke command...\033[0m"
 mkdir -p ~/bin
-curl -sSL https://raw.githubusercontent.com/notjustdanish/nuke/main/src/nuke -o ~/bin/nuke
+curl -fsSL https://raw.githubusercontent.com/notjustdanish/nuke/main/src/nuke -o ~/bin/nuke
 chmod +x ~/bin/nuke
 
-# === ADD ALIAS (supports bash, zsh, fish) ===
-SHELLRC=""
-if [ -n "$ZSH_VERSION" ]; then
-    SHELLRC="$HOME/.zshrc"
-elif [ -n "$FISH_VERSION" ]; then
-    mkdir -p ~/.config/fish
-    SHELLRC="$HOME/.config/fish/config.fish"
-    echo "alias nuke '~/bin/nuke'" >> "$SHELLRC"
-else
-    SHELLRC="$HOME/.bashrc"
+# === Add to PATH forever ===
+if ! grep -q "nuke" ~/.bashrc 2>/dev/null; then
+    echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
+    echo "alias nuke='~/bin/nuke'" >> ~/.bashrc
 fi
 
-if [ -n "$SHELLRC" ] && ! grep -q "nuke" "$SHELLRC" 2>/dev/null; then
-    echo "alias nuke='~/bin/nuke'" >> "$SHELLRC"
-fi
+# === Final success ===
+source ~/.bashrc 2>/dev/null || true
 
-# === DONE ===
-echo -e "\n\033[1;32mNUKE INSTALLED SUCCESSFULLY!\033[0m"
-echo -e "\033[1;36mModel: $MODEL (perfect for your ${RAM_GB}GB RAM)\033[0m"
-echo -e "\033[1;36mJust type → nuke\033[0m"
-echo -e "\033[90mMade by wtf.mr..⚙️\033[0m"
+echo -e "\n\033[1;32m╔═══════════════════════════════════════════╗"
+echo -e "   nuke INSTALLED SUCCESSFULLY!"
+echo -e "   Model: $MODEL"
+echo -e "   Just type: nuke"
+echo -e "╚═══════════════════════════════════════════╝\033[0m"
+echo -e "\033[90mMade with pure rage by wtf.mr\033[0m"
