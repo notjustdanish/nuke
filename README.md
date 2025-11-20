@@ -78,7 +78,7 @@ Just run the installer — nuke automatically picks the **fastest possible model
 
  <br> <br>
 
- Optional: Let power users override <b> (still one-liner) </b> 💀 Don't change if don't knoe 💀
+ Optional: Let power users override <b> (still one-liner) </b> 💀 Don't change if you don't know 💀
 
  ```
 # Force a specific model (example for 4GB laptop)
